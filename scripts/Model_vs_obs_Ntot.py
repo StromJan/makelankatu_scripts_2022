@@ -12,7 +12,6 @@ import matplotlib as mpl
 from mapTools import *
 from netcdfTools import *
 import lib_performance
-from useful_funcs import *
 import osmnx as ox
 import pyproj
 from scipy import stats

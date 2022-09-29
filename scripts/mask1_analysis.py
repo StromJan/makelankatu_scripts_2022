@@ -24,9 +24,7 @@ import pandas as pd
 import time
 import cmocean
 from mapTools import *
-import ScientificColourMaps6 as SCM6
 import seaborn as sns
-from useful_funcs import *
 from scipy.spatial.transform import Rotation
 from scipy import ndimage, misc,stats
 from cmcrameri import cm
@@ -315,7 +313,7 @@ def plot_wind(vertical=True,diff=False,other=None):
   
 
     
-        cmap2 = SCM6.vikO
+        cmap2 = cm.vikO
         cmap2.set_bad('dimgrey')
         axes[-1].set_facecolor('dimgrey')
 

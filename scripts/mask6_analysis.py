@@ -23,9 +23,7 @@ import pandas as pd
 import time
 import cmocean
 from mapTools import *
-import ScientificColourMaps6 as SCM6
 import seaborn as sns
-from useful_funcs import *
 from scipy.spatial.transform import Rotation
 from scipy.stats.mstats import gmean
 from scipy.stats import gstd, levene, ttest_ind
@@ -182,7 +180,7 @@ def plot_aerosol_profile(var):
 
 
 
-    cmap = SCM6.romaO_r
+    cmap = cm.romaO_r
     cmap.set_bad('dimgrey')
     
     fig,ax = plt.subplots(figsize=(10,16))

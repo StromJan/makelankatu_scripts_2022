@@ -8,7 +8,6 @@ Created on Mon Mar 21 09:30:48 2022
 import numpy as np
 import matplotlib.pyplot as plt
 from netCDF4 import Dataset as NetCDFFile
-from useful_funcs import *
 import matplotlib as mpl
 from matplotlib.colors import LightSource
 from cmcrameri import cm

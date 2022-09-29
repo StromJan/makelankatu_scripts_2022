@@ -15,7 +15,6 @@ import lib_performance
 import osmnx as ox
 import pyproj
 import warnings
-from useful_funcs import *
 from cmcrameri import cm
 warnings.filterwarnings("ignore")
 

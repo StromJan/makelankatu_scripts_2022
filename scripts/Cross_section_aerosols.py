@@ -28,9 +28,7 @@ import time
 import cmocean
 from mapTools import *
 from cmcrameri import cm
-import ScientificColourMaps6 as SCM6
 import seaborn as sns
-from useful_funcs import *
 sns.set()
 pal = sns.hls_palette(h=.9)
 plt.style.use('default')
@@ -56,7 +54,7 @@ var4 = 'theta'
 
 
 
-cmap = SCM6.romaO_r
+cmap = cm.romaO_r
 
 
 
