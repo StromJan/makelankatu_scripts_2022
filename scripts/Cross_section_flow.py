@@ -228,8 +228,8 @@ if (plot=='cross'):
         for ar in axes[i].get_children():
             if type(ar)==mpl.patches.FancyArrowPatch:
                 ar.set_alpha(0.5) # or x.set_visible(False)
-        axes[i].set_xlabel('x(m)',fontsize=12)
-        axes[i].set_title(titles[i],fontsize=12)
+        axes[i].set_xlabel('x(m)',fontsize=20)
+        axes[i].set_title(titles[i],fontsize=20)
 
 elif (plot=='rotated'):
 
@@ -301,7 +301,7 @@ elif (plot=='rotated'):
             labels = np.arange(len(Ntot[0]))
             labels2 = np.arange(len(Ntot))
             ax.text(0.88, 0.85, txts[i], color=tcolors[i],transform=ax.transAxes,
-                fontsize=18,bbox=dict(facecolor='0.8', edgecolor='none', pad=3.0))
+                fontsize=20,bbox=dict(facecolor='0.8', edgecolor='none', pad=3.0))
             
 
             
@@ -309,7 +309,7 @@ elif (plot=='rotated'):
             
             
 
-            ax.set_xlabel('x(m)',fontsize=18)
+            ax.set_xlabel('x(m)',fontsize=20)
 
 
 
@@ -324,7 +324,7 @@ elif (plot=='rotated'):
             ax.set_yticks(labels2[::2])
             ax.set_yticklabels(['{:.0f}'.format(2*s) for s in labels2[::2]])
             
-            ax.tick_params(axis='both', which='major', labelsize=16)
+            ax.tick_params(axis='both', which='major', labelsize=18)
 
             ax.set_aspect('equal')
 
@@ -339,8 +339,8 @@ else:
     for i in range(2):
         im = axes[i].imshow(w_vals[i][z1:z2,y1,x1:x2],vmin=-1,vmax=1,cmap=current_cmap,origin='lower')
 
-        axes[i].set_xlabel('x(m)',fontsize=12)
-        axes[i].set_title(titles[i],fontsize=12)
+        axes[i].set_xlabel('x(m)',fontsize=20)
+        axes[i].set_title(titles[i],fontsize=20)
     
     
 axes.ravel()[0].set_ylabel('z(m)',fontsize=18)
@@ -353,8 +353,8 @@ cbar = fig.colorbar(im, ax=axes.ravel().tolist(),orientation='horizontal',aspect
 cbar.set_label('w (m/s)',rotation=0,fontsize=20)
 cbar.ax.tick_params(labelsize=18) 
 
-fig.savefig('Rotated_Wind_NEW.pdf',dpi=250)
-fig.savefig('Rotated_wind_NEW.png',dpi=250)
+fig.savefig('Rotated_Wind_revision2.pdf',dpi=250)
+fig.savefig('Rotated_wind_revision2.png',dpi=250)
 
 
 

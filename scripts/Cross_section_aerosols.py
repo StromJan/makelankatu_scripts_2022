@@ -231,8 +231,8 @@ if (plot=='cross'):
         for ar in axes[i].get_children():
             if type(ar)==mpl.patches.FancyArrowPatch:
                 ar.set_alpha(0.5) # or x.set_visible(False)
-        axes[i].set_xlabel('x(m)',fontsize=12)
-        axes[i].set_title(titles[i],fontsize=12)
+        axes[i].set_xlabel('x(m)',fontsize=18)
+        axes[i].set_title(titles[i],fontsize=20)
 
 elif (plot=='rotated'):
 
@@ -296,7 +296,7 @@ elif (plot=='rotated'):
                 base = Ntot
                 
                 cbar = fig.colorbar(im, ax=axx[0],ticks=[1E4,2E4,4E4,6E4,8E4],orientation='vertical',aspect=15,shrink=.8,anchor=(0.0,-0.3),pad=0.05)
-                cbar.set_label(r'$\mathrm{N_{tot} (cm^{-3})}$',fontsize=16)
+                cbar.set_label(r'$\mathrm{N_{tot} (cm^{-3})}$',fontsize=18)
                 cbar.ax.tick_params(labelsize=16,which='both')
              
                 
@@ -328,10 +328,10 @@ elif (plot=='rotated'):
             # ax.set_ylabel('y(m)',fontsize=16)
 
             if (i==0):
-                ax.set_title(r'${}$'.format(titles[i]),fontsize=18)
+                ax.set_title(r'${}$'.format(titles[i]),fontsize=20)
             else:
                 
-                ax.set_title(r'${} - {}$'.format(titles[i],titles[0]),fontsize=18)
+                ax.set_title(r'${} - {}$'.format(titles[i],titles[0]),fontsize=20)
             
             
             ax.set_xticks(labels[::2])
@@ -355,9 +355,8 @@ else:
 
     for i in range(2):
         im = axes[i].imshow(w_vals[i][z1:z2,y1,x1:x2],vmin=-1,vmax=1,cmap=current_cmap,origin='lower')
-
-        axes[i].set_xlabel('x(m)',fontsize=12)
-        axes[i].set_title(titles[i],fontsize=12)
+        axes[i].set_xlabel('x(m)',fontsize=18)
+        axes[i].set_title(titles[i],fontsize=20)
     
     
 axes.ravel()[0].set_ylabel('z(m)',fontsize=18)
@@ -395,13 +394,13 @@ ax2.set_aspect('equal')
 cbar3 = fig2.colorbar(im3, ax=ax2,orientation='horizontal',aspect=40)
 cbar3.set_label(r'$\Delta (\%)$',rotation=0,fontsize=18)
 cbar3.ax.tick_params(labelsize=16) 
-ax2.set_title(r'${} - {}$'.format(titles[-1],titles[0]),fontsize=18)
+ax2.set_title(r'${} - {}$'.format(titles[-1],titles[0]),fontsize=20)
 
 
 
 
-fig.savefig('Rotated_Ntot_NEW.pdf',dpi=250)
-fig.savefig('Rotated_Ntot_NEW.png',dpi=250)
+fig.savefig('Rotated_Ntot_revision2.pdf',dpi=250)
+fig.savefig('Rotated_Ntot_revision2.png',dpi=250)
 
 fig2.savefig('Rotated_Ntot_nodepo.pdf',dpi=250)
 fig2.savefig('Rotated_Ntot_nodepo.png',dpi=250)

@@ -192,7 +192,7 @@ cbar2.ax.tick_params(labelsize=16)
 cbar1.set_label(r'$\mathrm{N_{tot,2m} (cm^{-3})}$',rotation=0,fontsize=18)
 cbar2.set_label(r'$\Delta \mathrm{N_{tot,2m}} (\%)$',rotation=0,fontsize=18)
 
-fig.savefig('/home/stromjan/Output/Obs_and_bias_Ntot_NEW.png',dpi=250)
-fig.savefig('/home/stromjan/Output/Obs_and_bias_Ntot_NEW.pdf',dpi=250)
+fig.savefig('/home/stromjan/Output/Obs_and_bias_Ntot_revision2.png',dpi=250)
+fig.savefig('/home/stromjan/Output/Obs_and_bias_Ntot_revision2.pdf',dpi=250)
 
 

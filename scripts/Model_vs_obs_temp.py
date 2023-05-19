@@ -164,11 +164,26 @@ for i,axi in enumerate(ax):
     axi.text(0.88, 0.9, txts[i],transform=axi.transAxes,
             fontsize=18,bbox=dict(facecolor='0.8', edgecolor='none', pad=3.0))
 
+
+### added
+#100m at latitude 60.2 in x-direction is 6371000m*cos(60.2 deg)*sin(0.001809595025 deg)
+
+    scalebar = AnchoredSizeBar(ax[0].transData,
+                           0.001809595025, '100 m', 'lower left', 
+                           pad=0.5,
+                           color='black',
+                           frameon=True,
+                           size_vertical=0.00001,alpha=0.2)
+    
+    ax[0].add_artist(scalebar)
+###
+       
+
 cbar1 = fig.colorbar(im,ax=ax[0],aspect=20,orientation='horizontal')
 cbar2 = fig.colorbar(im2,ax=ax[1:],aspect=40,orientation='horizontal')
 cbar1.ax.tick_params(labelsize=14) 
 cbar2.ax.tick_params(labelsize=14) 
 cbar1.set_label(r'$\mathrm{T}_{2m} (^\circ C)$',rotation=0,fontsize=16)
 cbar2.set_label(r'$\Delta \mathrm{T_{2m}}(^\circ C)$',rotation=0,fontsize=16)
-plt.savefig('/home/stromjan/Output/Obs_and_bias_Temp_NEW.pdf',dpi=250)
-plt.savefig('/home/stromjan/Output/Obs_and_bias_Temp_NEW.png',dpi=250)
+plt.savefig('/home/stromjan/Output/Obs_and_bias_Temp_revision2.pdf',dpi=250)
+plt.savefig('/home/stromjan/Output/Obs_and_bias_Temp_revision2.png',dpi=250)

@@ -13,9 +13,23 @@ from matplotlib.colors import LightSource
 from cmcrameri import cm
 import os
 import pyproj
+import matplotlib
 from mpl_toolkits.axes_grid1 import make_axes_locatable
+from mpl_toolkits.axes_grid1.anchored_artists import AnchoredSizeBar
 
 os.chdir("/home/stromjan/Output/")
+good_colors = ['#ac0535','#e85e45','#fbbf6c','#fcfdb9','#bde4a2','#54afac','#654a9c','#851170'][::-1]
+
+
+def make_colormap(N,colors=good_colors,linear=True,bad='white'):
+    if (linear):
+        colmap = matplotlib.colors.LinearSegmentedColormap.from_list('name',colors,N)
+        colmap.set_bad('lightgrey')
+    else:
+        colmap = matplotlib.colors.ListedColormap(colors)
+        colmap.set_bad('lightgrey')
+    return colmap
+
 
 def discrete_cmap(N, base_cmap=None):
     """Create an N-bin discrete colormap from the specified input map"""
@@ -179,8 +193,22 @@ for i,plot in enumerate(plots):
 
     ax.set_title(plot_labels[i],fontsize=22)
     ax.set_aspect('auto')
-    plt.savefig('{}.png'.format(plot_labels[i].split(' ')[0]),dpi=250)
-    plt.savefig('{}.pdf'.format(plot_labels[i].split(' ')[0]),dpi=250)
+
+### added
+#100m at latitude 60.2 in x-direction is 6371000m*cos(60.2 deg)*sin(0.001809595025 deg)
+
+    scalebar = AnchoredSizeBar(ax.transData,
+                           0.001809595025, '100 m', 'lower left', 
+                           pad=1,
+                           color='black',
+                           frameon=True,
+                           size_vertical=0.00001,alpha=0.2)
+
+    ax.add_artist(scalebar)
+###
+
+    plt.savefig('{}_revision2.png'.format(plot_labels[i].split(' ')[0]),dpi=250)
+    plt.savefig('{}_revision2.pdf'.format(plot_labels[i].split(' ')[0]),dpi=250)
 
 
 
@@ -262,7 +290,7 @@ def plot():
     x2 += length*90*np.cos((azimuth9-90)*np.pi/180) 
     y2 += -length*90*np.sin((azimuth9-90)*np.pi/180)
     
-    fig, ax = plt.subplots(figsize=(10,10),constrained_layout=True)
+    fig, ax = plt.subplots(figsize=(10,10))
     
     im = plt.imshow(mask,origin='lower',cmap=cmap3,alpha=.85)
     cbar=fig.colorbar(im,ax=[ax],ticks=range(num),location='top',shrink=.89,aspect=30,pad=0.05)
@@ -275,7 +303,7 @@ def plot():
     SR2 = plt.plot(332,200,'k*',markersize=14,linewidth=1, markerfacecolor='cyan',alpha=1, label='SR2')
     SR3 = plt.plot(516,283,'k*',markersize=14,linewidth=1, markerfacecolor='magenta', alpha=1, label='SR3')
 
- facecolor='#ac0535',alpha=1, label='SR3')
+   # facecolor='#ac0535',alpha=1, label='SR3')
     
     cbar.ax.set_xticklabels(ticks,fontsize=14)
     rect = mpl.patches.Rectangle((324,155), 46, 180, linewidth=1, 
@@ -312,7 +340,7 @@ def plot():
     ax.set_ylabel('Latitude ($^\circ$)',fontsize=16)
     
 
-    fig.legend(bbox_to_anchor=(0.0,.93,1.,0.),loc='upper center', ncol=5,fontsize=12,facecolor='grey',framealpha=0.3,columnspacing=1)
+    fig.legend(bbox_to_anchor=(0.0,.88,1.,0.),loc='upper center', ncol=5,fontsize=12,facecolor='grey',framealpha=0.3,columnspacing=1)
     ax.tick_params(axis='both', which='major', labelsize=14)
     ax.tick_params(axis='both', which='minor', labelsize=10)
     
@@ -327,11 +355,23 @@ def plot():
     ax.yaxis.set_minor_formatter(mpl.ticker.FormatStrFormatter('%.3f'))
     ax.yaxis.set_minor_formatter(mpl.ticker.FormatStrFormatter('%.3f'))    
     
+### added
+    scalebar = AnchoredSizeBar(ax.transData,
+                           100, '100 m', 'lower left', 
+                           pad=1,
+                           color='black',
+                           frameon=True,
+                           size_vertical=1,alpha=0.2)
 
-    plt.savefig('Regions_and_vortex_area.png',dpi=250)
+    ax.add_artist(scalebar)
+###
+
+    plt.savefig('Regions_and_vortex_area_revision2.png',dpi=250,bbox_inches='tight')
+    plt.savefig('Regions_and_vortex_area_revision2.pdf',bbox_inches='tight')
+
     plt.show()
 
 plt.close('all')
 plot()
-terrainplot()
+# terrainplot()
 

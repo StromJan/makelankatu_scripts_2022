@@ -31,6 +31,8 @@ from cmcrameri import cm
 import sys
 import os
 import pyproj
+from mpl_toolkits.axes_grid1.anchored_artists import AnchoredSizeBar
+
 os.chdir("/home/stromjan/Output/")
 
 
@@ -290,13 +292,13 @@ def plot_wind(vertical=True,diff=False,other=None):
 
 
 
-        axes[0].set_ylabel('Latitude ($^\circ$)',fontsize=12)  
+        axes[0].set_ylabel('Latitude ($^\circ$)',fontsize=16)  
 
-        [axes[i].set_title(r'${}$'.format(titles2[j]),fontsize=14) for i,j in enumerate([base_i,comp_i])]
+        [axes[i].set_title(r'${}$'.format(titles2[j]),fontsize=16) for i,j in enumerate([base_i,comp_i])]
 
 
         cbar = fig.colorbar(surf, ax=axes[:2].ravel().tolist(),orientation='horizontal',aspect=30)
-        cbar.set_label(r'$\mathrm{V_{4m} (m~s^{-1})}$',fontsize=14)
+        cbar.set_label(r'$\mathrm{V_{4m} (m~s^{-1})}$',fontsize=16)
 
         base = stat[0]
         comp = stat[1]
@@ -331,11 +333,11 @@ def plot_wind(vertical=True,diff=False,other=None):
 
     
 
-        axes[-1].set_title(r'$\Delta({} - {})$'.format(titles2[comp_i],titles2[base_i]),fontsize=14)
+        axes[-1].set_title(r'$\Delta({} - {})$'.format(titles2[comp_i],titles2[base_i]),fontsize=16)
 
 
         cbar2 = fig.colorbar(p,ax=[axes[-1]],orientation='horizontal',aspect=15)
-        cbar2.set_label(r'$\mathrm{\Delta(m~s^{-1})}$',fontsize=14)
+        cbar2.set_label(r'$\mathrm{\Delta(m~s^{-1})}$',fontsize=16)
         
         cbar.ax.tick_params(labelsize=12) 
         cbar2.ax.tick_params(labelsize=12) 
@@ -347,16 +349,30 @@ def plot_wind(vertical=True,diff=False,other=None):
             axes[i].text(0.88, 0.9, txts[i], color=tcolors[i],transform=axes[i].transAxes,
                     fontsize=18,bbox=dict(facecolor='0.8', edgecolor='none', pad=3.0))
             
-            axes[i].tick_params(axis='both', labelsize=12)
-            axes[i].set_xlabel('Longitude ($^\circ$)',fontsize=12)  
+            axes[i].tick_params(axis='both', labelsize=14)
+            axes[i].set_xlabel('Longitude ($^\circ$)',fontsize=16)  
             
         axes[0].set_aspect(2)
         axes[1].set_aspect(2)
         axes[-1].set_aspect(2)
+   
+            
+### added
+#100m at latitude 60.2 in x-direction is 6371000m*cos(60.2 deg)*sin(0.001809595025 deg)
+
+        scalebar = AnchoredSizeBar(axes[0].transData,
+                               0.001809595025, '100 m', 'lower left', 
+                               pad=1,
+                               color='black',
+                               frameon=True,
+                               size_vertical=0.00001,alpha=0.2)
+    
+        axes[0].add_artist(scalebar)
+###
         
 
-        plt.savefig('Wind_difference_{}_vs_{}_4m_NEW.pdf'.format(titles[base_i],titles[comp_i]),dpi=250)
-        plt.savefig('Wind_difference_{}_vs_{}_4m_NEW.png'.format(titles[base_i],titles[comp_i]),dpi=250)
+        plt.savefig('Wind_difference_{}_vs_{}_4m_revision2.pdf'.format(titles[base_i],titles[comp_i]),dpi=250)
+        plt.savefig('Wind_difference_{}_vs_{}_4m_revision2.png'.format(titles[base_i],titles[comp_i]),dpi=250)
 
             
     else:
@@ -377,7 +393,7 @@ def plot_wind(vertical=True,diff=False,other=None):
 
         surf = axes.imshow(w4734_rad-w4734_chem,cmap=SCM6.vikO,norm=colors.TwoSlopeNorm(vcenter=0))
         cbar = fig.colorbar(surf,orientation='vertical')
-        axes.set_title(f'Difference in vertical wind ({2**h}m) (RRTMG On - Off)',fontsize=12)
+        axes.set_title(f'Difference in vertical wind ({2**h}m) (RRTMG On - Off)',fontsize=16)
 
 
 
@@ -403,8 +419,8 @@ def plot_temp(T_arrs):
     for i in range(2):
 
 
-        axes[i].set_title('{}'.format(timestrs[i]),fontsize=14)
-        axes[i].set_xlabel('x(m)',fontsize=12)
+        axes[i].set_title('{}'.format(timestrs[i]),fontsize=16)
+        axes[i].set_xlabel('x(m)',fontsize=16)
     
     
     T1 = T_arrs[run][0,j]-273.15#-T_arrs[i][0,1]
@@ -415,11 +431,11 @@ def plot_temp(T_arrs):
 
 
 
-    axes[0].set_ylabel('y(m)',fontsize=12)    
+    axes[0].set_ylabel('y(m)',fontsize=16)    
     
     
     cbar = fig.colorbar(surf, ax=axes[:-1].ravel().tolist(),orientation='horizontal',aspect=30)
-    cbar.set_label(r'$\degree C$',fontsize=14)
+    cbar.set_label(r'$\degree C$',fontsize=16)
     
     
 
@@ -428,12 +444,12 @@ def plot_temp(T_arrs):
         
     
     im2 = axes[-1].imshow(dt,cmap=SCM6.vikO,vmin=-4,vmax=4)#,norm=mpl.colors.TwoSlopeNorm(vcenter=0))#,vmin=10,vmax=35)
-    axes[-1].set_xlabel('x(m)',fontsize=12)  
-    axes[-1].set_title(r'$\Delta T$ ({} - {})'.format(timestrs[-1],timestrs[0]),fontsize=14)
+    axes[-1].set_xlabel('x(m)',fontsize=16)  
+    axes[-1].set_title(r'$\Delta T$ ({} - {})'.format(timestrs[-1],timestrs[0]),fontsize=16)
     cbar2 = fig.colorbar(im2,ax=[axes[-1]],orientation='horizontal',aspect=15)
-    cbar2.set_label(r'$\Delta\degree C$',fontsize=14)
-    cbar.ax.tick_params(labelsize=12) 
-    cbar2.ax.tick_params(labelsize=12) 
+    cbar2.set_label(r'$\Delta\degree C$',fontsize=16)
+    cbar.ax.tick_params(labelsize=14) 
+    cbar2.ax.tick_params(labelsize=14) 
 
 
 def plot_all_temps():
@@ -489,7 +505,7 @@ def plot_all_temps():
             
                 plot1 = ax.imshow(T-273.15,cmap=cmap,vmin=8.4,vmax=8.8)#norm=colors.LogNorm(vmin=0.01,vmax=5))
                 cbar1 = fig.colorbar(plot1, ax=axes[0],orientation='vertical',aspect=30)
-                fig.text(0.48,0.75,r'$T_{2m}^{o}C$',fontsize=14,rotation=0)
+                fig.text(0.48,0.75,r'$T_{2m}^{o}C$',fontsize=16,rotation=0)
                 
             
             else:
@@ -536,19 +552,17 @@ def plot_all_temps():
             
         
         
-        axes[0].set_ylabel('Latitude ($^\circ$)',fontsize=12)  
+        axes[0].set_ylabel('Latitude ($^\circ$)',fontsize=16)  
 
-        [axes[i].set_title(r'${}$'.format(titles2[j]),fontsize=14) for i,j in enumerate([base_i,comp_i])]
+        [axes[i].set_title(r'${}$'.format(titles2[j]),fontsize=16) for i,j in enumerate([base_i,comp_i])]
 
 
 
         cbar = fig.colorbar(surf, ax=axes[:2].ravel().tolist(),orientation='horizontal',aspect=30)
-        cbar.set_label(r'$T_{2m} (^oC)$',fontsize=14)
+        cbar.set_label(r'$T_{2m} (^oC)$',fontsize=16)
         
 
-
-    
-        cmap2 = SCM6.lajolla
+        cmap2 = cm.lajolla
         cmap2.set_bad('dimgrey')
         axes[-1].set_facecolor('dimgrey')
 
@@ -568,7 +582,7 @@ def plot_all_temps():
 
 
         cbar2 = fig.colorbar(p,ax=[axes[-1]],ticks=np.arange(2.5,5.01,0.25)[::2],orientation='horizontal',aspect=15)
-        cbar2.set_label(r'$\Delta(^oC)$',fontsize=14)
+        cbar2.set_label(r'$\Delta(^oC)$',fontsize=16)
         
         
 
@@ -584,20 +598,39 @@ def plot_all_temps():
             axes[i].text(0.88, 0.9, txts[i], color=tcolors[i],transform=axes[i].transAxes,
                     fontsize=18,bbox=dict(facecolor='0.8', edgecolor='none', pad=3.0))
             
-            axes[i].tick_params(axis='both', labelsize=12)
+            axes[i].tick_params(axis='both', labelsize=16)
 
-            axes[i].set_xlabel('Longitude ($^\circ$)',fontsize=12)  
+            axes[i].set_xlabel('Longitude ($^\circ$)',fontsize=16)  
 
 
-    cbar.ax.tick_params(labelsize=12) 
-    cbar2.ax.tick_params(labelsize=12) 
+    cbar.ax.tick_params(labelsize=14) 
+    cbar2.ax.tick_params(labelsize=14) 
+    axes[0].set_aspect(2)
+    axes[1].set_aspect(2)
+
+
+    
+### added
+#100m at latitude 60.2 in x-direction is 6371000m*cos(60.2 deg)*sin(0.001809595025 deg)
+
+    scalebar = AnchoredSizeBar(axes[0].transData,
+                           0.001809595025, '100 m', 'lower left', 
+                           pad=1,
+                           color='black',
+                           frameon=True,
+                           size_vertical=0.00001,alpha=0.2)
+
+    axes[0].add_artist(scalebar)
+###
     axes[0].set_aspect(2)
     axes[1].set_aspect(2)
     
 
+    
 
-    plt.savefig('theta_2m_comparison_NEW.png',dpi=250)
-    plt.savefig('theta_2m_comparison_NEW.pdf',dpi=250)
+
+    plt.savefig('theta_2m_comparison_revision2.png',dpi=250)
+    plt.savefig('theta_2m_comparison_revision2.pdf',dpi=250)
 
     return
 
