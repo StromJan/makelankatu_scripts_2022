@@ -6,17 +6,31 @@ Created on Tue Dec 21 11:20:10 2021
 @author: stromjan
 """
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib as mpl
-from mapTools import *
-from netcdfTools import *
-import lib_performance
 import osmnx as ox
 import pyproj
 import warnings
 from cmcrameri import cm
+from mpl_toolkits.axes_grid1.anchored_artists import AnchoredSizeBar
+import netCDF4 as nc
+
 warnings.filterwarnings("ignore")
+
+
+good_colors = ['#ac0535','#e85e45','#fbbf6c','#fcfdb9','#bde4a2','#54afac','#654a9c','#851170'][::-1]#,'#8d377d'][::-1]
+
+
+def make_colormap(N,colors=good_colors,linear=True,bad='white'):
+    if (linear):
+        colmap = mpl.colors.LinearSegmentedColormap.from_list('name',colors,N)
+        colmap.set_bad('lightgrey')
+    else:
+        colmap = mpl.colors.ListedColormap(colors)
+        colmap.set_bad('lightgrey')
+    return colmap
+
+
 
 palm_path = '/media/stromjan/Work_Drive/Puhti/JOBS/0609_morning_{}'
 fixed = '_fixed_flow'
@@ -185,5 +199,5 @@ cbar1.ax.tick_params(labelsize=14)
 cbar2.ax.tick_params(labelsize=14) 
 cbar1.set_label(r'$\mathrm{T}_{2m} (^\circ C)$',rotation=0,fontsize=16)
 cbar2.set_label(r'$\Delta \mathrm{T_{2m}}(^\circ C)$',rotation=0,fontsize=16)
-plt.savefig('/home/stromjan/Output/Obs_and_bias_Temp_revision2.pdf',dpi=250)
-plt.savefig('/home/stromjan/Output/Obs_and_bias_Temp_revision2.png',dpi=250)
+plt.savefig('/home/stromjan/Output/Obs_and_bias_Temp_revision2.pdf',dpi=300)
+plt.savefig('/home/stromjan/Output/Obs_and_bias_Temp_revision2.png',dpi=300)

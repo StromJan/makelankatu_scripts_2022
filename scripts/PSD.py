@@ -260,7 +260,7 @@ for i,ax in enumerate(axes):
 
 
 
-plt.savefig('/home/stromjan/Output/PSD_{}m_Canyon_4x4_NEW.png'.format(2+ zi*2),dpi=250)
-plt.savefig('/home/stromjan/Output/PSD_{}m_Canyon_4x4_NEW.pdf'.format(2+ zi*2),dpi=250)
+plt.savefig('/home/stromjan/Output/PSD_{}m_Canyon_4x4_NEW.png'.format(2+ zi*2),dpi=300)
+plt.savefig('/home/stromjan/Output/PSD_{}m_Canyon_4x4_NEW.pdf'.format(2+ zi*2),dpi=300)
 
 

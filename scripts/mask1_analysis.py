@@ -9,26 +9,12 @@ Created on Mon Jun  1 13:14:45 2020
 
 from netCDF4 import Dataset as NetCDFFile
 import numpy as np
-import xarray as xr
 import matplotlib.pyplot as plt
-import matplotlib.animation as animation
-from matplotlib.colors import ListedColormap, LinearSegmentedColormap
-import matplotlib.dates as md
 import matplotlib as mpl
-import datetime as dt
-from datetime import timedelta
-import dateutil.relativedelta as relativedelta
 from matplotlib import colors
-from scipy.signal import detrend
-import pandas as pd
-import time
-import cmocean
-from mapTools import *
 import seaborn as sns
-from scipy.spatial.transform import Rotation
 from scipy import ndimage, misc,stats
 from cmcrameri import cm
-import sys
 import os
 import pyproj
 from mpl_toolkits.axes_grid1.anchored_artists import AnchoredSizeBar
@@ -371,8 +357,8 @@ def plot_wind(vertical=True,diff=False,other=None):
 ###
         
 
-        plt.savefig('Wind_difference_{}_vs_{}_4m_revision2.pdf'.format(titles[base_i],titles[comp_i]),dpi=250)
-        plt.savefig('Wind_difference_{}_vs_{}_4m_revision2.png'.format(titles[base_i],titles[comp_i]),dpi=250)
+        plt.savefig('Wind_difference_{}_vs_{}_4m_revision2.pdf'.format(titles[base_i],titles[comp_i]),dpi=300)
+        plt.savefig('Wind_difference_{}_vs_{}_4m_revision2.png'.format(titles[base_i],titles[comp_i]),dpi=300)
 
             
     else:
@@ -629,8 +615,8 @@ def plot_all_temps():
     
 
 
-    plt.savefig('theta_2m_comparison_revision2.png',dpi=250)
-    plt.savefig('theta_2m_comparison_revision2.pdf',dpi=250)
+    plt.savefig('theta_2m_comparison_revision2.png',dpi=300)
+    plt.savefig('theta_2m_comparison_revision2.pdf',dpi=300)
 
     return
 

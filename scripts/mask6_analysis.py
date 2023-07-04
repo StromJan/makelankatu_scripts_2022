@@ -8,28 +8,10 @@ Created on Tue Jun 22 10:39:20 2021
 
 from netCDF4 import Dataset as NetCDFFile
 import numpy as np
-import xarray as xr
 import matplotlib.pyplot as plt
-import matplotlib.animation as animation
-from matplotlib.colors import ListedColormap, LinearSegmentedColormap
-import matplotlib.dates as md
 import matplotlib as mpl
-import datetime as dt
-from datetime import timedelta
-import dateutil.relativedelta as relativedelta
-from matplotlib import colors
-from scipy.signal import detrend
-import pandas as pd
-import time
-import cmocean
-from mapTools import *
 import seaborn as sns
-from scipy.spatial.transform import Rotation
 from scipy.stats.mstats import gmean
-from scipy.stats import gstd, levene, ttest_ind
-from scipy import ndimage, misc,stats
-import sys
-import os
 from cmcrameri import cm
 
 
@@ -157,52 +139,6 @@ titles = ['\mathrm{R_1A_1}','\mathrm{R_1A_0}', '\mathrm{R_0A_1}','\mathrm{R_0A_0
 heights = '{} m above surface'
 
 
-
-
-def calculate_p(a1,a2,dependent=False):
-    return stats.ttest_ind(a1,a2,nan_policy='propagate',equal_var=dependent)[-1]
-
-
-def plot_aerosol_profile(var):
-
-
-    Vars = [read_var(rad_data,var)[start:end,:,:,:],read_var(salsaoff_data,var)[start:end,:,:,:]]
-    VarS0 = [read_var(rad_data2,var)[start:end,:,:,:],read_var(salsaoff_data2,var)[start:end,:,:,:]]
-
-
-    Vars = np.mean(Vars,axis=(1,3,4))
-    VarS0 = np.mean(VarS0,axis=(1,3,4))
-    
-    
-    y = np.arange(121)
-
- 
-
-
-
-    cmap = cm.romaO_r
-    cmap.set_bad('dimgrey')
-    
-    fig,ax = plt.subplots(figsize=(10,16))
-    
-    lines = ['r-','b-','r--','b--']
-    
-    
-
-        
-    ax.plot(Vars[0],y,lines[0],label=titles[0]+' (container)')
-    ax.plot(VarS0[0],y,lines[2],label=titles[0]+' (other side)')
-
-    ax.plot(Vars[1],y,lines[1],label=titles[1]+' (container)')
-    ax.plot(VarS0[1],y,lines[3],label=titles[1]+' (other side)')
-
-    ax.set_xscale('log')
-
-    ax.grid(True)
-    ax.set_ylabel('Height above ground (m)',fontsize=12)
-    ax.set_xlabel(var.split('_')[-1],fontsize=12)
-    ax.legend(loc='best')
-
 def plot_aerosol_profiles():
 
     
@@ -249,7 +185,7 @@ def plot_aerosol_profiles():
                 axes[r,i].set_xlim(8E-12,1E-10)
         
         
-            cmap = SCM6.romaO_r
+            cmap = cm.romaO_r
             cmap.set_bad('dimgrey')
             
             
@@ -291,8 +227,8 @@ def plot_aerosol_profiles():
         ax.get_yaxis().set_tick_params(which='major', labelsize=18)
 
 
-    plt.savefig('/home/stromjan/Output/Profiles1_all_runs_NEW.pdf',dpi=250)
-    plt.savefig('/home/stromjan/Output/Profiles1_all_runs_NEW.png',dpi=250)
+    plt.savefig('/home/stromjan/Output/Profiles1_all_runs_NEW.pdf',dpi=300)
+    plt.savefig('/home/stromjan/Output/Profiles1_all_runs_NEW.png',dpi=300)
 
 
 

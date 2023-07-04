@@ -6,18 +6,28 @@ Created on Tue Dec 21 11:09:44 2021
 @author: stromjan
 """
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib as mpl
-from mapTools import *
-from netcdfTools import *
-import lib_performance
 import osmnx as ox
 import pyproj
-from scipy import stats
 import os
 import warnings
 from cmcrameri import cm
+import netCDF4 as nc
+
+
+good_colors = ['#ac0535','#e85e45','#fbbf6c','#fcfdb9','#bde4a2','#54afac','#654a9c','#851170'][::-1]#,'#8d377d'][::-1]
+
+
+def make_colormap(N,colors=good_colors,linear=True,bad='white'):
+    if (linear):
+        colmap = mpl.colors.LinearSegmentedColormap.from_list('name',colors,N)
+        colmap.set_bad('lightgrey')
+    else:
+        colmap = mpl.colors.ListedColormap(colors)
+        colmap.set_bad('lightgrey')
+    return colmap
+
 
 warnings.filterwarnings("ignore")
 
@@ -192,7 +202,7 @@ cbar2.ax.tick_params(labelsize=16)
 cbar1.set_label(r'$\mathrm{N_{tot,2m} (cm^{-3})}$',rotation=0,fontsize=18)
 cbar2.set_label(r'$\Delta \mathrm{N_{tot,2m}} (\%)$',rotation=0,fontsize=18)
 
-fig.savefig('/home/stromjan/Output/Obs_and_bias_Ntot_revision2.png',dpi=250)
-fig.savefig('/home/stromjan/Output/Obs_and_bias_Ntot_revision2.pdf',dpi=250)
+fig.savefig('/home/stromjan/Output/Obs_and_bias_Ntot_revision2.png',dpi=300)
+fig.savefig('/home/stromjan/Output/Obs_and_bias_Ntot_revision2.pdf',dpi=300)
 
 

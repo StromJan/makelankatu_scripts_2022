@@ -7,26 +7,12 @@ Created on Mon Jun 14 17:54:07 2021
 #from mpl_toolkits.basemap import Basemap, cm
 from netCDF4 import Dataset as NetCDFFile
 import numpy as np
-import xarray as xr
 import matplotlib.pyplot as plt
-import matplotlib.animation as animation
-from matplotlib.colors import ListedColormap, LinearSegmentedColormap
-import matplotlib.dates as md
 import matplotlib as mpl
-import datetime as dt
-from datetime import timedelta
-import dateutil.relativedelta as relativedelta
-from matplotlib import colors
-from scipy.signal import detrend
-from scipy.spatial.transform import Rotation
-from scipy.stats.mstats import gmean
 from scipy import ndimage, misc,stats
 from scipy.ndimage.morphology import binary_dilation
 from scipy.ndimage import gaussian_filter
-import pandas as pd
-import time
-import cmocean
-from mapTools import *
+
 from cmcrameri import cm
 import seaborn as sns
 sns.set()
@@ -55,8 +41,6 @@ var4 = 'theta'
 
 
 cmap = cm.romaO_r
-
-
 
 
 
@@ -202,39 +186,8 @@ plot = 'rotated'
 
 fig, axes = plt.subplots(ncols=2,nrows=2,sharey=True,figsize=(12,14),constrained_layout=True)
 
-if (plot=='cross'):
-    
-    x1, x2 = (44,64)
-    x,y = np.meshgrid(np.arange(170),np.arange(150))
-    
-    horiz = 1
-    vert = 1
-    
-    mask = (((x*vert-horiz*y)==47)) #& (x<60) & (x>40))
-    
-    
-    for i in range(2):
-    
-    
 
-        x,z = np.meshgrid(np.arange(x1,x2),np.arange(z1,z2))
-    
-    
-        u_masked = u[:,mask]
-        v_masked = v[:,mask]
-        w_masked = w_vals[i][:,mask]
-
-
-        im = axes[i].imshow(w_masked[z1:z2,x1:x2],vmin=-1,vmax=1,origin='lower',cmap=current_cmap)
-        c = axes[i].streamplot(x-x1,z-z1,u_masked[z1:z2,x1:x2],w_masked[z1:z2,x1:x2],density=0.6,color='k')
-        c.lines.set_alpha(0.5)
-        for ar in axes[i].get_children():
-            if type(ar)==mpl.patches.FancyArrowPatch:
-                ar.set_alpha(0.5) # or x.set_visible(False)
-        axes[i].set_xlabel('x(m)',fontsize=18)
-        axes[i].set_title(titles[i],fontsize=20)
-
-elif (plot=='rotated'):
+if (plot=='rotated'):
 
     x,y = np.meshgrid(np.arange(170),np.arange(150))
 
@@ -399,9 +352,9 @@ ax2.set_title(r'${} - {}$'.format(titles[-1],titles[0]),fontsize=20)
 
 
 
-fig.savefig('Rotated_Ntot_revision2.pdf',dpi=250)
-fig.savefig('Rotated_Ntot_revision2.png',dpi=250)
+fig.savefig('Rotated_Ntot_revision2.pdf',dpi=300)
+fig.savefig('Rotated_Ntot_revision2.png',dpi=300)
 
-fig2.savefig('Rotated_Ntot_nodepo.pdf',dpi=250)
-fig2.savefig('Rotated_Ntot_nodepo.png',dpi=250)
+fig2.savefig('Rotated_Ntot_nodepo.pdf',dpi=300)
+fig2.savefig('Rotated_Ntot_nodepo.png',dpi=300)
 

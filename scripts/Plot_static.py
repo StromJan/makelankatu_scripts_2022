@@ -207,8 +207,8 @@ for i,plot in enumerate(plots):
     ax.add_artist(scalebar)
 ###
 
-    plt.savefig('{}_revision2.png'.format(plot_labels[i].split(' ')[0]),dpi=250)
-    plt.savefig('{}_revision2.pdf'.format(plot_labels[i].split(' ')[0]),dpi=250)
+    plt.savefig('{}_revision2.png'.format(plot_labels[i].split(' ')[0]),dpi=300)
+    plt.savefig('{}_revision2.pdf'.format(plot_labels[i].split(' ')[0]),dpi=300)
 
 
 
@@ -244,7 +244,7 @@ def terrainplot():
     cbar1.set_label('Orography (m)',fontsize=14)
     cbar2.set_label('Topography (m)',fontsize=14)
 
-    plt.savefig('Terrain.png',dpi=250)
+    plt.savefig('Terrain.png',dpi=300)
     
 
     plt.show()
@@ -366,7 +366,7 @@ def plot():
     ax.add_artist(scalebar)
 ###
 
-    plt.savefig('Regions_and_vortex_area_revision2.png',dpi=250,bbox_inches='tight')
+    plt.savefig('Regions_and_vortex_area_revision2.png',dpi=300,bbox_inches='tight')
     plt.savefig('Regions_and_vortex_area_revision2.pdf',bbox_inches='tight')
 
     plt.show()

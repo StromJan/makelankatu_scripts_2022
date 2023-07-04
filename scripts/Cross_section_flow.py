@@ -7,26 +7,11 @@ Created on Mon Jun 14 17:54:07 2021
 
 from netCDF4 import Dataset as NetCDFFile
 import numpy as np
-import xarray as xr
 import matplotlib.pyplot as plt
-import matplotlib.animation as animation
-from matplotlib.colors import ListedColormap, LinearSegmentedColormap
-import matplotlib.dates as md
 import matplotlib as mpl
-import datetime as dt
-from datetime import timedelta
-import dateutil.relativedelta as relativedelta
-from matplotlib import colors
-from scipy.signal import detrend
-from scipy.spatial.transform import Rotation
-from scipy.stats.mstats import gmean
 from scipy import ndimage, misc,stats
 from scipy.ndimage.morphology import binary_dilation
 from scipy.ndimage import gaussian_filter
-import pandas as pd
-import time
-import cmocean
-from mapTools import *
 from cmcrameri import cm
 import seaborn as sns
 sns.set()
@@ -52,7 +37,7 @@ var3 = 'w'
 var4 = 'theta'
 
 
-cmap = SCM6.romaO_r
+cmap = cm.romaO_r
 
 
 
@@ -353,8 +338,8 @@ cbar = fig.colorbar(im, ax=axes.ravel().tolist(),orientation='horizontal',aspect
 cbar.set_label('w (m/s)',rotation=0,fontsize=20)
 cbar.ax.tick_params(labelsize=18) 
 
-fig.savefig('Rotated_Wind_revision2.pdf',dpi=250)
-fig.savefig('Rotated_wind_revision2.png',dpi=250)
+fig.savefig('Rotated_Wind_revision2.pdf',dpi=300)
+fig.savefig('Rotated_wind_revision2.png',dpi=300)
 
 
 

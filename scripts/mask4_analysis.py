@@ -8,30 +8,29 @@ Created on Mon Jun 14 18:16:56 2021
 
 from netCDF4 import Dataset as NetCDFFile
 import numpy as np
-import xarray as xr
 import matplotlib.pyplot as plt
-import matplotlib.animation as animation
-from matplotlib.colors import ListedColormap, LinearSegmentedColormap
-import matplotlib.dates as md
 import matplotlib as mpl
-import datetime as dt
-from datetime import timedelta
-import dateutil.relativedelta as relativedelta
-from matplotlib import colors
-from scipy.signal import detrend
-import pandas as pd
-import time
-import cmocean
-from mapTools import *
 import seaborn as sns
-from scipy.spatial.transform import Rotation
 from scipy import ndimage, misc,stats
-import sys
 import os
 from cmcrameri import cm
 import pyproj
 
 os.chdir("/home/stromjan/Output/")
+
+
+
+good_colors = ['#ac0535','#e85e45','#fbbf6c','#fcfdb9','#bde4a2','#54afac','#654a9c','#851170'][::-1]#,'#8d377d'][::-1]
+
+
+def make_colormap(N,colors=good_colors,linear=True,bad='white'):
+    if (linear):
+        colmap = mpl.colors.LinearSegmentedColormap.from_list('name',colors,N)
+        colmap.set_bad('lightgrey')
+    else:
+        colmap = mpl.colors.ListedColormap(colors)
+        colmap.set_bad('lightgrey')
+    return colmap
 
 
 sns.set()
@@ -227,7 +226,7 @@ def plot_aerosol(var,height=0):
     higher = [delta.min(), 150, delta.max()]
 
     
-    cmap2 = SCM6.vik
+    cmap2 = cm.vik
     cmap2.set_bad('dimgrey')
     axes[-1].set_facecolor('dimgrey')
 
@@ -248,8 +247,8 @@ def plot_aerosol(var,height=0):
     cbar2 = fig.colorbar(p,ax=[axes[-1]],orientation='horizontal',aspect=15)
     cbar2.set_label(r'$\Delta$(%)',fontsize=14)
 
-    plt.savefig('{}_mask4_4m_{}vs{}_NEW.png'.format(var.split('_')[-1],timestrs[0],timestrs[1]),dpi=250)
-    plt.savefig('{}_mask4_4m_{}vs{}_NEW.pdf'.format(var.split('_')[-1],timestrs[0],timestrs[1]),dpi=250)
+    plt.savefig('{}_mask4_4m_{}vs{}_NEW.png'.format(var.split('_')[-1],timestrs[0],timestrs[1]),dpi=300)
+    plt.savefig('{}_mask4_4m_{}vs{}_NEW.pdf'.format(var.split('_')[-1],timestrs[0],timestrs[1]),dpi=300)
 
 
 def plot_aerosol_4x4(var,height=1):
@@ -306,7 +305,7 @@ def plot_aerosol_4x4(var,height=1):
     cmap = cm.roma_r
     cmap.set_bad('dimgrey')
     
-    cmap2 = SCM6.vik
+    cmap2 = cm.vik
     cmap2.set_bad('dimgrey')
 
 
@@ -413,8 +412,8 @@ def plot_aerosol_4x4(var,height=1):
 
     [axes[i].set_xlabel('Longitude ($^\circ$)',fontsize=18) for i in range(2,4)]
     [axes[i].set_ylabel('Latitude ($^\circ$)',fontsize=18) for i in range(0,4,2)]
-    plt.savefig('Ntot_comparison_4x4_{}m_NEW.png'.format(int(zp[height])),dpi=250)
-    plt.savefig('Ntot_comparison_4x4_{}m_NEW.pdf'.format(int(zp[height])),dpi=250)
+    plt.savefig('Ntot_comparison_4x4_{}m_NEW.png'.format(int(zp[height])),dpi=300)
+    plt.savefig('Ntot_comparison_4x4_{}m_NEW.pdf'.format(int(zp[height])),dpi=300)
 
 
 
@@ -447,7 +446,7 @@ def plot_aerosol_diffs():
       
 
         
-        cmap2 = SCM6.vikO
+        cmap2 = cm.vikO
         cmap2.set_bad('dimgrey')
         ax.set_facecolor('dimgrey')
     
@@ -464,7 +463,7 @@ def plot_aerosol_diffs():
 
     cbar2 = fig.colorbar(p,ax=[axes.flatten()],orientation='horizontal',aspect=30)
     cbar2.set_label(r'$\Delta$(%)',fontsize=14)
-    plt.savefig('bins_change_4m_{}_vs_{}_NEW.png'.format(timestrs[0],timestrs[1]),dpi=250)
+    plt.savefig('bins_change_4m_{}_vs_{}_NEW.png'.format(timestrs[0],timestrs[1]),dpi=300)
 
 def t_test(x,y,alternative='both-sided'):
     _, double_p = stats.ttest_ind(x,y,equal_var = False)
